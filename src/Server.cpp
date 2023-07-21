@@ -68,7 +68,7 @@ namespace jws {
         for (auto &page: this->pages) {
             jutil::String path = page->getPath();
             C_STR(path_cstr, path)
-            this->srv->Get(path_cstr, HTTP_RESPONSE(req, res) {
+            this->srv->Get(path_cstr, [page](const jws::Request& req, jws::Response& res) {
                 page->onLoad(req, res);
             });
         }

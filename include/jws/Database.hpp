@@ -15,9 +15,7 @@ namespace jws {
             public:
             Query(const jutil::String &_sql, sql::Connection *c) : sql(_sql), conn(c), index(1) {
                 C_STR(sql_cstr, this->sql);
-                jutil::mutexLock(&this->mutex);
                 this->stmt = this->conn->prepareStatement(sql_cstr);
-                jutil::mutexUnlock(&this->mutex);
             }
 
             template <typename T>
